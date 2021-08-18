@@ -1,32 +1,46 @@
 {
   "name": "react-math-editor",
   "version": "0.1.0",
-  "main": "./src/index.ts",
-  "devDependencies": {
-    "@babel/core": "^7.14.0",
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-essentials": "^6.2.9",
-    "@storybook/addon-knobs": "^6.2.9",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/react": "^6.2.9",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "babel-loader": "^8.2.2",
-    "storybook-readme": "^5.0.9",
-    "typescript": "^4.1.2"
-  },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-jss": "^10.6.0"
-  },
+  "private": true,
+  "workspaces": [
+    "lib",
+    "docs"
+  ],
   "scripts": {
-    "start": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook"
+    "build": "yarn build:package && yarn build:website",
+    "build:package": "yarn workspace react-math-editor build",
+    "build:website": "yarn workspace react-math-editor-docs build",
+    "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
+    "prettier": "prettier --config .prettierrc --write \"**/*.{js,jsx,ts,tsx,json}\""
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.6.1",
+    "@types/react": "^17.0.18",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint": "^7.32.0",
+    "eslint-config-jc": "^1.0.6",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,mdx}": [
+      "prettier --write"
+    ]
   }
 }
