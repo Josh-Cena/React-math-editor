@@ -1,5 +1,5 @@
 {
-  "name": "react-math-editor",
+  "name": "react-math-editor-monorepo",
   "version": "1.0.0-alpha.0",
   "private": true,
   "workspaces": [
@@ -15,11 +15,6 @@
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,jsx,ts,tsx,json}\""
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.6.1",
-    "@types/react": "^17.0.18",
-    "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
     "eslint": "^7.32.0",

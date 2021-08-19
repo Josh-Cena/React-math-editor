@@ -34,11 +34,9 @@ jobs:
             ${{ runner.os }}-website-
 
       - name: Install dependencies
-        run: |
-          yarn install --frozen-lockfile
-          ls node_modules
-      - run: cd website && yarn build
-
+        run: yarn install --frozen-lockfile
+      - name: Build website
+        run: yarn build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
