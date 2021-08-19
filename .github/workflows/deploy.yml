@@ -13,9 +13,6 @@ jobs:
     runs-on: ubuntu-20.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
-    defaults:
-      run:
-        working-directory: website
     steps:
       - uses: actions/checkout@v2
 
@@ -38,10 +35,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ..
           yarn install --frozen-lockfile
           ls node_modules
-      - run: yarn build
+      - run: cd website && yarn build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
