@@ -36,9 +36,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-website-
 
-      - run: |
+      - name: Install dependencies
+        run: |
           cd ..
           yarn install --frozen-lockfile
+          ls node_modules
       - run: yarn build
 
       - name: Deploy
