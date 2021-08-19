@@ -28,8 +28,8 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Demo',
+              to: '/demo',
             },
           ],
         },
@@ -60,6 +60,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          path: '../docs',
           routeBasePath: '/',
           editUrl: 'https://github.com/Josh-Cena/react-math-editor/edit/master/docs/',
         },

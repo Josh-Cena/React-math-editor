@@ -4,7 +4,7 @@
   "private": true,
   "workspaces": [
     "lib",
-    "docs"
+    "website"
   ],
   "scripts": {
     "build": "yarn build:package && yarn build:website",
