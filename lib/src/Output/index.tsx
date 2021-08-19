@@ -10,11 +10,18 @@ export interface Props {
   inline?: boolean;
 }
 
-export default function Output({as: Component = 'div', inline = false}: Props): JSX.Element {
+export default function Output({
+  as: Component = 'div',
+  inline = false,
+}: Props): JSX.Element {
   const MathComp = inline ? InlineMath : BlockMath;
   return (
     <EditorContext.Consumer>
-      {({inputValue}) => <Component><MathComp>{inputValue}</MathComp></Component>}
+      {({ inputValue }) => (
+        <Component>
+          <MathComp>{inputValue}</MathComp>
+        </Component>
+      )}
     </EditorContext.Consumer>
   );
 }

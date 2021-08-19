@@ -62,7 +62,8 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           path: '../docs',
           routeBasePath: '/',
-          editUrl: 'https://github.com/Josh-Cena/react-math-editor/edit/master/docs/',
+          editUrl:
+            'https://github.com/Josh-Cena/react-math-editor/edit/master/docs/',
         },
         blog: false,
         theme: {

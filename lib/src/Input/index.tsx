@@ -6,9 +6,14 @@ export interface Props {
   as: any;
 }
 
-export default function Input({as: Component = 'input'}: Props): JSX.Element {
+export default function Input({ as: Component = 'input' }: Props): JSX.Element {
   const { setInputValue } = useContext(EditorContext);
-  return <Component contentEditable onChange={(e: React.ChangeEvent<any>) => {
-    setInputValue(e.target.value)
-  }} />;
+  return (
+    <Component
+      contentEditable
+      onChange={(e: React.ChangeEvent<any>) => {
+        setInputValue(e.target.value);
+      }}
+    />
+  );
 }
