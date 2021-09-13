@@ -456,6 +456,7 @@ const vm = new Vue({
       ],
       [{ disp: '\\text{Text}', left: '\\text{', right: '}' }],
     ],
+    color: '#ff0000',
   },
   methods: {
     add(charset, row, col) {
