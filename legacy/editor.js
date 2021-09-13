@@ -12,7 +12,7 @@ function showbox(num, show) {
     : 'none';
 }
 function insertSymb(text) {
-  if (input.selectionStart || input.selectionStart === '0') {
+  if (input.selectionStart || input.selectionStart === 0) {
     const startPos = input.selectionStart;
     const endPos = input.selectionEnd;
     const scrollPos = input.scrollTop;
