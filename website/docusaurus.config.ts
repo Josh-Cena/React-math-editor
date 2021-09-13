@@ -12,6 +12,7 @@ const config: Partial<DocusaurusConfig> = {
   favicon: 'img/favicon/favicon.ico',
   organizationName: 'Josh-Cena',
   projectName: 'react-math-editor',
+  trailingSlash: true,
   themeConfig: {
     navbar: {
       title: 'React Math Editor',

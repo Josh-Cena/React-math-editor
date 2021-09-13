@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>LaTeX editor</title>
+	<link rel="icon" href="Icons/Icon.png">
+	<link rel="apple-touch-icon" href="Icons/Icon.png">
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=default"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+	<header>
+		\(\LaTeX\) Editor
+		<div id="HelpIcon"><img src="Icons/Help.svg" width="40px" onclick="showDialog('Helppanel',true)" /></div>
+	</header>
+	<div class="overlay"></div>
+	<div id="toolbar">
+		<div id="tabs">
+			<ul>
+				<li id="Tab1" onmouseenter="showbox(1,true)" onmouseleave="showbox(1,false)">
+					<a href="#">Symbols</a>
+					<div id="Panel1">
+						<table id="symboltab">
+							<tr v-for="(row,r) in symbols">
+								<td v-for="(symbol,c) in row">
+									<a href="#" v-on:click="add(1,r,c)" v-bind:title="symbol">\({{symbol}}\)</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
+				<li id="Tab2" onmouseenter="showbox(2,true)" onmouseleave="showbox(2,false)">
+					<a href="#">Operators</a>
+					<div id="Panel2">
+						<table id="optab">
+							<tr v-for="(row,r) in operators">
+								<td v-for="(operator,c) in row">
+									<a href="#" v-on:click="add(2,r,c)" v-bind:title="operator.disp">\({{operator.disp}}\)</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
+				<li id="Tab3" onmouseenter="showbox(3,true)" onmouseleave="showbox(3,false)">
+					<a href="#">Structures</a>
+					<div id="Panel3">
+						<table id="structtab">
+							<tr v-for="(row,r) in structures">
+								<td v-for="(structure,c) in row">
+									<a href="#" v-on:click="add(3,r,c)" v-bind:title="typeof structure == 'string' ? structure : structure.disp">\[{{typeof structure == "string" ? structure : structure.disp}}\]</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
+				<li id="Tab4" onmouseenter="showbox(4,true)" onmouseleave="showbox(4,false)">
+					<a href="#">Arrows</a>
+					<div id="Panel4">
+						<table id="arrowtab">
+							<tr v-for="(row,r) in arrows">
+								<td v-for="(arrow,c) in row">
+									<a href="#" v-on:click="add(4,r,c)" v-bind:title="typeof arrow == 'string' ? arrow : arrow.disp">\({{typeof arrow == "string" ? arrow : arrow.disp}}\)</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
+				<li id="Tab5" onmouseenter="showbox(5,true)" onmouseleave="showbox(5,false)">
+					<a href="#">Fonts</a>
+					<div id="Panel5">
+						<table id="fonttab">
+							<tr v-for="(row,r) in fonts">
+								<td v-for="(font,c) in row">
+									<a href="#" v-on:click="add(5,r,c)" v-bind:title="font.disp">\({{font.disp}}\)</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
+				<li id="Tab6" onmouseenter="showbox(6,true)" onmouseleave="showbox(6,false)">
+					<a href="#">Styles</a>
+					<div id="Panel6">
+						<table id="stytab">
+							<tr v-for="(row,r) in styles">
+								<td v-for="(style,c) in row">
+									<a href="#" v-on:click="add(6,r,c)" v-bind:title="style.disp">\({{style.disp}}\)</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="fontsetting">
+			<input id="colorbox" type="color" value="#FF0000" v-model="color">
+			<button onclick="insertSymb({disp:'\\color{'+document.getElementById('colorbox').value+'}{text}',left:'\\color{'+document.getElementById('colorbox').value+'}{',right:'}'})">Insert color</button>
+		</div>
+	</div>
+	<div id="text">
+		<textarea id="input" placeholder="Input TeX formula here." v-model="formula"></textarea>
+		<div id="output">$${}$$</div>
+	</div>
+	<div id="history">
+		<button id="foldBtn" v-on:click="hide()">{{icon}}</button>
+		<div id="historypanel">
+			<div id="topbar">
+				<ul id="icons">
+					<li id="L1" v-on:click="toFront(1)"><img src="Icons/Icon_1.svg" width="25px" /></li>
+					<li id="L2" v-on:click="toFront(2)"><img src="Icons/Icon_2.svg" width="25px" /></li>
+					<li id="L3" v-on:click="toFront(3)"><img src="Icons/Icon_3.svg" width="25px" /></li>
+					<li id="L4" v-on:click="toFront(4)"><img src="Icons/Icon_4.svg" width="25px" /></li>
+				</ul>
+			</div>
+			<div id="menu1" class="menu">
+			<transition-group id="hislist" name="hislist" tag="ul">
+				<li v-for="(formula,index) in formulas" v-bind:id="index" v-bind:key="index" class="hislist-item">
+					<a v-on:click="removeformula(index)" class="closeBtn">×</a>
+					<p v-on:click="importformula(index)" v-bind:title="formula.name">$${{formula.formula}}$$</p>
+				</li>
+			</transition-group>
+			<button id="pushBtn" class="addBtn" v-on:click="pushformula()">Push current formula</button>
+			</div>
+			<div id="menu2" class="menu">
+				<br>
+				<table id="catalog">
+					<tr><th>Written as</th><th>Parsed as</th></tr>
+					<tr v-for="(shortcut,index) in shortcuts">
+						<td><code>{{shortcut.disp}}</code></td>
+						<td><code>{{shortcut.cut}}</code></td>
+						<td><img src="Icons/Delete.svg" width="20px" v-on:click="removeSC(index)" /></td>
+					</tr>
+				</table>
+				<button class="addBtn" onclick="showDialog('AddSC',true)">Add new shortcut</button>
+			</div>
+			<div id="menu3" class="menu">
+				<br>The saying goes: 
+				<br><b>百度一下，你就知道。</b>
+				<form action="http://www.baidu.com/s" method="GET" target="_blank">
+					<img src="Icons/Baidu.png" width="200px" />
+					<input id="url" type="text" name="wd" size="38" />
+					<input id="submitBtn" type="submit" value="百度一下"/>
+					<input type="hidden" name="ie" value="utf-8" />
+					<input type="hidden" name="tn" value="ace" />
+				</form>
+			</div>
+			<div id="menu4" class="menu">
+				<br>
+				<label for="sizebox">Font size:</label>
+				<input id="sizebox" v-model="fontsize">
+				<label for="sizebox">pt</label>
+				<br><br>
+				<label for="bkgcolor">Math background color:</label>
+				<select id="bkgcolor" onchange="switchcolor(this.value)">
+					<option value="Transparent">Transparent</option>
+					<option value="White">White</option>
+				</select>
+			</div>
+		</div>
+		<div id="Nameinput" class="dialog">
+			<p>Please enter a name for this formula: </p>
+			<input id="formulaname" placeholder="Name"/>
+			<br><button class="cancel" v-on:click="proceedSaving(false)">Cancel</button>
+			<button class="confirm" v-on:click="proceedSaving(true)">Confirm</button>
+		</div>
+		<div id="AddSC" class="dialog">
+			<label for="short">\</label><input id="short" placeholder="The shorthand"/>
+			<input type="number" step="1" min="0" max="100" id="param" placeholder="# of parameters"/>
+			<br><input id="cut" placeholder="What it stands for"/>
+			<br><button class="cancel" v-on:click="proceedAddingSC(false)">Cancel</button>
+			<button class="confirm" v-on:click="proceedAddingSC(true)">Confirm</button>
+		</div>
+		<div id="Helppanel" class="dialog">
+			<h1>Help</h1>
+			<p>Stuck? Don't know how to implement what you have in mind? Here are some sources you may find useful: </p>
+			<a href="https://tex.stackexchange.com" target="_blank">The TeX Stack Exchange</a>
+			<br><a href="https://docs.mathjax.org/en/latest/input/tex/index.html" target="_blank">About MathJax</a>
+			<p>This is a webpage designed for real-time <b><i>formula</i></b> (be ware: this is NOT for entire LaTeX documents)
+				edition. It uses MathJax to render the formula, whose syntax is very much akin to that of LaTeX, except 
+				having much fewer symbols and environments. See the links above for more detailed information about both.</p>
+			<br><button class="confirm" onclick="showDialog('Helppanel',false)">Confirm</button>
+		</div>
+	</div>
+	<script type="text/javascript" src="editor.js"></script>
+</body>
