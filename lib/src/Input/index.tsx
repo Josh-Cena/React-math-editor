@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, ComponentProps } from 'react';
 import { EditorContext } from '../EditorProvider';
 
-export interface Props {
+export interface Props extends Record<string, unknown> {
   // TODO how to type this
   as: any;
 }
 
-export default function Input({ as: Component = 'input' }: Props): JSX.Element {
+export default function Input({ as: Component = 'input', ...props }: Props): JSX.Element {
   const { setInputValue } = useContext(EditorContext);
   return (
     <Component
@@ -14,6 +14,7 @@ export default function Input({ as: Component = 'input' }: Props): JSX.Element {
       onChange={(e: React.ChangeEvent<any>) => {
         setInputValue(e.target.value);
       }}
+      {...props}
     />
   );
 }

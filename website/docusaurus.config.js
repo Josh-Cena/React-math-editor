@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const darkCodeTheme = require('prism-react-renderer/themes/vsdark');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'React math editor',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Out-of-the-box math formula editing and real-time rendering',
   url: 'https://joshcena.com',
   baseUrl: '/react-math-editor/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon/favicon.ico',
   organizationName: 'Josh-Cena',
   projectName: 'react-math-editor',
   themeConfig: {
     navbar: {
       title: 'React Math Editor',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'logo',
         src: 'img/logo.svg',
       },
     },

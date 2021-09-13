@@ -12,7 +12,8 @@
     "build:website": "yarn workspace react-math-editor-website build",
     "publish:package": "cd lib && yarn build && npm publish",
     "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
-    "prettier": "prettier --config .prettierrc --write \"**/*.{js,jsx,ts,tsx,json}\""
+    "prettier": "prettier --config .prettierrc --write \"**/*.{js,jsx,ts,tsx,json}\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.29.2",
@@ -20,14 +21,12 @@
     "eslint": "^7.32.0",
     "eslint-config-jc": "^1.0.6",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-header": "^3.0.0",
-    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.1.2",
-    "prettier": "^2.3.2",
+    "prettier": "^2.4.0",
     "typescript": "^4.3.5"
   },
   "lint-staged": {

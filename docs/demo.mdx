@@ -4,9 +4,46 @@ sidebar_position: 2
 
 # Demo
 
-import {EditorProvider, Input, Output} from 'react-math-editor';
+import { EditorProvider, Input, Output } from 'react-math-editor';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import usePrismTheme from '@theme/hooks/usePrismTheme';
+
+## Basic example
+
+```tsx
+function Editor() {
+  return (
+    <EditorProvider>
+      <Input />
+      <Output />
+    </EditorProvider>
+  );
+}
+```
 
 <EditorProvider>
   <Input />
   <Output />
 </EditorProvider>
+
+<!-- TODO
+## Using `prism-react-renderer`
+
+```tsx
+import Highlight from 'prism-react-renderer';
+
+function Editor() {
+  return (
+    <EditorProvider>
+      <Input as={Highlight} />
+      <Output />
+    </EditorProvider>
+  );
+}
+```
+
+<EditorProvider>
+  <Input as={Highlight} {...defaultProps} language={'tex'} theme={usePrismTheme()} />
+  <Output />
+</EditorProvider>
+-->
