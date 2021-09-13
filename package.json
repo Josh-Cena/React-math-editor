@@ -12,7 +12,7 @@
     "build:website": "yarn workspace react-math-editor-website build",
     "publish:package": "cd lib && yarn build && npm publish",
     "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
-    "prettier": "prettier --config .prettierrc --write \"**/*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --config .prettierrc --write \"**/*.{js,jsx,ts,tsx,json,md,mdx}\"",
     "prepare": "husky install"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import React, {ComponentProps} from 'react';
+import React, { ComponentProps } from 'react';
 import { EditorContext } from '../EditorProvider';
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';

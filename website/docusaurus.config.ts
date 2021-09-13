@@ -1,6 +1,6 @@
 import lightCodeTheme from 'prism-react-renderer/themes/github';
 import darkCodeTheme from 'prism-react-renderer/themes/vsDark';
-import type {DocusaurusConfig} from '@docusaurus/types';
+import type { DocusaurusConfig } from '@docusaurus/types';
 
 const config: Partial<DocusaurusConfig> = {
   title: 'React math editor',

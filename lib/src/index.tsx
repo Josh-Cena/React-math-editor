@@ -1,4 +1,4 @@
-import React, {CSSProperties} from 'react';
+import React, { CSSProperties } from 'react';
 import Input from './Input';
 import Output from './Output';
 import EditorProvider from './EditorProvider';
@@ -11,7 +11,7 @@ export interface Props {
   inputStyle: CSSProperties;
   outputStyle: CSSProperties;
   outputPosition: 'left' | 'right' | 'above' | 'below';
-};
+}
 
 export default function MathEditor({
   inputComp = 'input',

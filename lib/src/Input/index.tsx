@@ -6,7 +6,10 @@ export interface Props extends Record<string, unknown> {
   as: any;
 }
 
-export default function Input({ as: Component = 'input', ...props }: Props): JSX.Element {
+export default function Input({
+  as: Component = 'input',
+  ...props
+}: Props): JSX.Element {
   const { setInputValue } = useContext(EditorContext);
   return (
     <Component
