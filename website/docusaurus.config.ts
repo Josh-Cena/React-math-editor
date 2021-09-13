@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/vsdark');
+import lightCodeTheme from 'prism-react-renderer/themes/github';
+import darkCodeTheme from 'prism-react-renderer/themes/vsDark';
+import type {DocusaurusConfig} from '@docusaurus/types';
 
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
-module.exports = {
+const config: Partial<DocusaurusConfig> = {
   title: 'React math editor',
   tagline: 'Out-of-the-box math formula editing and real-time rendering',
   url: 'https://joshcena.com',
@@ -59,7 +58,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./sidebars.config.js'),
           path: '../docs',
           routeBasePath: '/',
           editUrl:
@@ -73,3 +72,5 @@ module.exports = {
     ],
   ],
 };
+
+export = config;

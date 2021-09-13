@@ -1,0 +1,11 @@
+// Something like
+// ```css
+// .link:hover {
+//   box-shadow: 3px;
+// }
+{
+  "include": ["./*.config.ts", "config/"],
+  "compilerOptions": {
+    "esModuleInterop": true
+  }
+}
