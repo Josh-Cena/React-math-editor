@@ -1,1 +1,1 @@
-website/static/legacy -linguist-detectable
+website/static/legacy/* -linguist-detectable
